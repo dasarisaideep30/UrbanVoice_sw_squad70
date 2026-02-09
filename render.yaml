@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: urban-voice-backend
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+      - key: DATABASE_URL
+        value: file:./dev.db
+      - key: NEXTAUTH_URL
+        fromService:
+          type: web
+          name: urban-voice-backend
+      - key: NEXTAUTH_SECRET
+        generateValue: true
